@@ -1,4 +1,4 @@
-# tiny_note
+# TinyNote
 
 A simple note-taking Flutter app.
 
