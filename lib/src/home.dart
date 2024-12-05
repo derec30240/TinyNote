@@ -101,6 +101,8 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
         //TODO: Enable to create new note or task.
         onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
