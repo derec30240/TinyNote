@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'settings_controller.dart';
-import '../constants.dart';
+import '../common/constants.dart';
+import '../controllers/global_controller.dart';
 
 /// Displays the various settings that can be customized by the user.
-///
-/// When a user changes a setting, `SettingsController` is updated and Widgets
-/// that listen to `SettingsController` are rebuilt.
-class SettingsView extends StatelessWidget {
-  const SettingsView({
-    super.key,
-    required this.controller,
-  });
+class SettingsPage extends StatelessWidget {
+  SettingsPage({super.key});
 
-  static const routeName = '/settings';
-
-  final SettingsController controller;
+  final GlobalController globalController = Get.put(GlobalController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +20,12 @@ class SettingsView extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Glue the `SettingsController` to the theme selection in the
-            // DropdownButton.
-            //
-            // When a user selects a theme from the dropdown list, the
-            // `SettingsController` is updated, which rebuilds the
-            // `MaterialApp`.
             Row(
               children: [
                 const Text('Theme Mode: '),
                 const SizedBox(width: 20.0),
                 DropdownButton<ThemeMode>(
-                  value: controller.themeMode,
+                  value: globalController.themeMode.value,
                   items: const [
                     DropdownMenuItem(
                       value: ThemeMode.system,
@@ -53,7 +40,7 @@ class SettingsView extends StatelessWidget {
                       child: Text('Dark Theme'),
                     )
                   ],
-                  onChanged: controller.updateThemeMode,
+                  onChanged: globalController.updateThemeMode,
                 ),
               ],
             ),
@@ -66,10 +53,10 @@ class SettingsView extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.palette_outlined,
-                        color: controller.colorSelected.color,
+                        color: globalController.themeColor.value.color,
                       ),
                       const SizedBox(width: 10.0),
-                      Text(controller.colorSelected.label),
+                      Text(globalController.themeColor.value.label),
                     ],
                   ),
                   itemBuilder: (context) {
@@ -79,13 +66,15 @@ class SettingsView extends StatelessWidget {
                         ColorSeed currentColor = ColorSeed.values[index];
                         return PopupMenuItem(
                           value: index,
-                          enabled: currentColor != controller.colorSelected,
+                          enabled:
+                              currentColor != globalController.themeColor.value,
                           child: Wrap(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Icon(
-                                  currentColor == controller.colorSelected
+                                  currentColor ==
+                                          globalController.themeColor.value
                                       ? Icons.color_lens
                                       : Icons.color_lens_outlined,
                                   color: currentColor.color,
@@ -101,7 +90,7 @@ class SettingsView extends StatelessWidget {
                       },
                     );
                   },
-                  onSelected: controller.updateColorSelected,
+                  onSelected: globalController.updateThemeColor,
                 ),
               ],
             )

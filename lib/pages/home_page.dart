@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'settings/settings_view.dart';
-import 'constants.dart';
+import 'settings_page.dart';
+import '../common/constants.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  static const routeName = '/';
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   var selectedIndex = ScreenSelected.screen1.value;
 
   @override
@@ -72,10 +71,7 @@ class _HomeState extends State<Home> {
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
-                // Navigate to the settings page. If the user leaves and returns
-                // to the app after it has been killed while running in the
-                // background, the navigation stack is restored.
-                Navigator.restorablePushNamed(context, SettingsView.routeName);
+                Get.to(() => SettingsPage());
               },
             ),
             ListTile(
