@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
 
 import 'settings_page.dart';
 import '../common/constants.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
-//   @override
-//   State<HomePage> createState() => _HomePageState();
-// }
-
-// class _HomePageState extends State<HomePage> {
-  // var selectedIndex = ScreenSelected.screen1.value;
+  GlobalController globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +18,25 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tiny Note'),
-        // actions: [
-        //   // Show the Folder button only in the Notes screen
-        //   if (selectedIndex == 0)
-        //     IconButton(
-        //       tooltip: 'Folders',
-        //       //TODO: Enable to create and manage folders.
-        //       onPressed: () {},
-        //       icon: const Icon(Icons.folder_outlined),
-        //     ),
-        //   IconButton(
-        //     tooltip: 'Search',
-        //     //TODO: Enable to search for notes and tasks.
-        //     onPressed: () {},
-        //     icon: const Icon(Icons.search),
-        //   ),
-        // ],
+        actions: [
+          Obx(() {
+            // Show the Folder button only in the Notes screen
+            return globalController.selectedHomeIndex.value == 0
+                ? IconButton(
+                    tooltip: 'Folders',
+                    //TODO: Enable to create and manage folders.
+                    onPressed: () {},
+                    icon: const Icon(Icons.folder_outlined),
+                  )
+                : Container();
+          }),
+          IconButton(
+            tooltip: 'Search',
+            //TODO: Enable to search for notes and tasks.
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -85,15 +84,15 @@ class HomePage extends StatelessWidget {
       ),
       //TODO: Fill the body with meaningful things.
       body: const Placeholder(),
-      bottomNavigationBar: NavigationBar(
-        // selectedIndex: selectedIndex,
-        // onDestinationSelected: (index) {
-        //   setState(() {
-        //     selectedIndex = index;
-        //   });
-        // },
-        destinations: appBarDestinations,
-      ),
+      bottomNavigationBar: Obx(() {
+        return NavigationBar(
+          selectedIndex: globalController.selectedHomeIndex.value,
+          onDestinationSelected: (index) {
+            globalController.updateHomeIndex(index);
+          },
+          destinations: appBarDestinations,
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         //TODO: Enable to create new note or task.
         onPressed: () {},

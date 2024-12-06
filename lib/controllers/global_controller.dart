@@ -9,6 +9,8 @@ class GlobalController extends GetxController {
   var themeMode = ThemeMode.system.obs;
   var themeColor = ColorSeed.baseColor.obs;
 
+  var selectedHomeIndex = 0.obs;
+
   void updateThemeMode(ThemeMode? newThemeMode) {
     if (newThemeMode == null) return;
     if (newThemeMode == themeMode.value) return;
@@ -21,5 +23,12 @@ class GlobalController extends GetxController {
     if (ColorSeed.values[value] == themeColor.value) return;
 
     themeColor.value = ColorSeed.values[value];
+  }
+
+  void updateHomeIndex(int? newHomeindex) {
+    if (newHomeindex == null) return;
+    if (newHomeindex == selectedHomeIndex.value) return;
+
+    selectedHomeIndex.value = newHomeindex;
   }
 }
