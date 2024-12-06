@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 import 'settings_page.dart';
 import '../common/constants.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
 
-class _HomePageState extends State<HomePage> {
-  var selectedIndex = ScreenSelected.screen1.value;
+// class _HomePageState extends State<HomePage> {
+  // var selectedIndex = ScreenSelected.screen1.value;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +22,22 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tiny Note'),
-        actions: [
-          // Show the Folder button only in the Notes screen
-          if (selectedIndex == 0)
-            IconButton(
-              tooltip: 'Folders',
-              //TODO: Enable to create and manage folders.
-              onPressed: () {},
-              icon: const Icon(Icons.folder_outlined),
-            ),
-          IconButton(
-            tooltip: 'Search',
-            //TODO: Enable to search for notes and tasks.
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
-        ],
+        // actions: [
+        //   // Show the Folder button only in the Notes screen
+        //   if (selectedIndex == 0)
+        //     IconButton(
+        //       tooltip: 'Folders',
+        //       //TODO: Enable to create and manage folders.
+        //       onPressed: () {},
+        //       icon: const Icon(Icons.folder_outlined),
+        //     ),
+        //   IconButton(
+        //     tooltip: 'Search',
+        //     //TODO: Enable to search for notes and tasks.
+        //     onPressed: () {},
+        //     icon: const Icon(Icons.search),
+        //   ),
+        // ],
       ),
       drawer: Drawer(
         child: ListView(
@@ -86,12 +86,12 @@ class _HomePageState extends State<HomePage> {
       //TODO: Fill the body with meaningful things.
       body: const Placeholder(),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: selectedIndex,
-        onDestinationSelected: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
+        // selectedIndex: selectedIndex,
+        // onDestinationSelected: (index) {
+        //   setState(() {
+        //     selectedIndex = index;
+        //   });
+        // },
         destinations: appBarDestinations,
       ),
       floatingActionButton: FloatingActionButton(

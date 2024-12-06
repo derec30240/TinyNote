@@ -14,7 +14,6 @@ class GlobalController extends GetxController {
     if (newThemeMode == themeMode.value) return;
 
     themeMode.value = newThemeMode;
-    Get.changeThemeMode(newThemeMode);
   }
 
   void updateThemeColor(int? value) {
@@ -22,6 +21,5 @@ class GlobalController extends GetxController {
     if (ColorSeed.values[value] == themeColor.value) return;
 
     themeColor.value = ColorSeed.values[value];
-    Get.changeTheme(ThemeData(colorSchemeSeed: themeColor.value.color));
   }
 }

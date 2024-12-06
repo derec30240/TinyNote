@@ -10,23 +10,23 @@ class MyApp extends StatelessWidget {
 
   final GlobalController globalController = Get.put(GlobalController());
 
+  ThemeData _buildTheme(Brightness brightness) {
+    return ThemeData(
+      colorSchemeSeed: globalController.themeColor.value.color,
+      useMaterial3: true,
+      brightness: brightness,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: globalController.themeColor.value.color,
-        useMaterial3: true,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        colorSchemeSeed: globalController.themeColor.value.color,
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      themeMode: globalController.themeMode.value,
-      color: globalController.themeColor.value.color,
-      home: HomePage(),
-    );
+    return Obx(() => GetMaterialApp(
+          title: 'Tiny Note',
+          debugShowCheckedModeBanner: false,
+          theme: _buildTheme(Brightness.light),
+          darkTheme: _buildTheme(Brightness.dark),
+          themeMode: globalController.themeMode.value,
+          home: HomePage(),
+        ));
   }
 }
