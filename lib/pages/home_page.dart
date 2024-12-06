@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/pages/about_page.dart';
 
 import 'settings_page.dart';
+import 'about_page.dart';
 import '../common/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -76,8 +78,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.info),
               title: const Text('About'),
-              //TODO: Create the about page and navigate to that.
-              onTap: () {},
+              onTap: () {
+                Get.to(() => AboutPage());
+              },
             ),
           ],
         ),
