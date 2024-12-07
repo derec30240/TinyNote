@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:tiny_note/common/constants.dart';
+import '../common/constants.dart';
 
 class GlobalController extends GetxController {
   static GlobalController instance = Get.find();
