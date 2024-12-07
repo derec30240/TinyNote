@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'about_page.dart';
 import '../controllers/global_controller.dart';
+import 'note_edit_page.dart';
 import 'notes_page.dart';
 import 'settings_page.dart';
 import 'tasks_page.dart';
@@ -30,7 +31,11 @@ class HomePage extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         //TODO: Enable to create new note or task.
-        onPressed: () {},
+        onPressed: () {
+          (globalController.selectedHomeIndex.value == 0)
+              ? Get.to(() => NoteEditPage(type: 'add', title: '', content: ''))
+              : Get.to(() => const Placeholder());
+        },
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         child: const Icon(Icons.add),
