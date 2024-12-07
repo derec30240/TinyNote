@@ -7,6 +7,7 @@ import 'notes_page.dart';
 import 'settings_page.dart';
 import 'tasks_page.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 

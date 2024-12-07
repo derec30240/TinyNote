@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controllers/global_controller.dart';
+import 'controllers/notes_controller.dart';
 import 'pages/home_page.dart';
 
 /// The Widget that configures the application.
@@ -9,6 +10,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final GlobalController globalController = Get.put(GlobalController());
+  final NotesController notesController = Get.put(NotesController());
 
   ThemeData _buildTheme(Brightness brightness) {
     return ThemeData(
