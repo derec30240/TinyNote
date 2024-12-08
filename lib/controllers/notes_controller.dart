@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/note.dart';
@@ -16,31 +15,20 @@ class NotesController extends GetxController {
     _loadNotes();
   }
 
-  _loadNotes() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> _loadNotes() async {
+    final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('notes')) {
       List<String> notesStringList = prefs.getStringList('notes')!;
-      notes.assignAll(notesStringList.map((noteString) {
-        Map<String, dynamic> noteMap = json.decode(noteString);
-        return Note(
-            title: noteMap['title'],
-            content: noteMap['content'],
-            dateCreated: noteMap['dateCreated'],
-            dateLastEdited: noteMap['dateLastEdited']);
-      }).toList());
+      notes.assignAll(notesStringList
+          .map((noteString) => Note.fromJson(json.decode(noteString)))
+          .toList());
     }
   }
 
-  _saveNotes() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> notesStringList = notes
-        .map((note) => json.encode({
-              'title': note.title,
-              'content': note.content,
-              'dateCreated': note.dateCreated,
-              'dateLastEdited': note.dateLastEdited
-            }))
-        .toList();
+  Future<void> _saveNotes() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> notesStringList =
+        notes.map((note) => json.encode(note.toJson())).toList();
     prefs.setStringList('notes', notesStringList);
   }
 
@@ -48,8 +36,8 @@ class NotesController extends GetxController {
     notes.add(Note(
       title: title,
       content: content,
-      dateCreated: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
-      dateLastEdited: DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
+      dateCreated: DateTime.now(),
+      dateLastEdited: DateTime.now(),
     ));
     update();
     _saveNotes();
@@ -67,8 +55,7 @@ class NotesController extends GetxController {
         title: title,
         content: content,
         dateCreated: oldNote.dateCreated,
-        dateLastEdited:
-            DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+        dateLastEdited: DateTime.now());
     update();
     _saveNotes();
   }

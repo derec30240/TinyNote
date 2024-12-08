@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/notes_controller.dart';
 import 'note_detail_page.dart';
@@ -45,7 +46,8 @@ class NotesPage extends StatelessWidget {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(notesController.notes[index].dateLastEdited),
+                      Text(DateFormat('yyyy-MM-dd HH:mm:ss')
+                          .format(notesController.notes[index].dateCreated)),
                       IconButton(
                         onPressed: () {
                           Get.defaultDialog(
@@ -53,6 +55,7 @@ class NotesPage extends StatelessWidget {
                             middleText: 'Confirm to delete this note?',
                             textConfirm: 'Yes',
                             textCancel: 'No',
+                            buttonColor: Theme.of(context).colorScheme.primary,
                             onConfirm: () {
                               notesController.deleteNote(index);
                               Get.back();
