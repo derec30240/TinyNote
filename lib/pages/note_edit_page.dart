@@ -69,7 +69,17 @@ class NoteEditPage extends StatelessWidget {
                       contentController.text,
                     );
                     Get.back();
-                    Get.snackbar('Message', 'Note added.');
+                    // Get.snackbar('Message', 'Note added.');
+                    final noteAddSnackBar = SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      content: const Text('Note added.'),
+                      action: SnackBarAction(
+                        label: 'Close',
+                        onPressed: () {},
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(noteAddSnackBar);
                   } else {
                     notesController.editNote(
                       notesController.notes
@@ -78,7 +88,17 @@ class NoteEditPage extends StatelessWidget {
                       contentController.text,
                     );
                     Get.back();
-                    Get.snackbar('Message', 'Note edited.');
+                    final noteEditSnackBar = SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      content: const Text('Note edited.'),
+                      action: SnackBarAction(
+                        label: 'Close',
+                        onPressed: () {},
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(noteEditSnackBar);
                   }
                 },
                 child: (type == 'add')

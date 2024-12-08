@@ -56,10 +56,18 @@ class NotesPage extends StatelessWidget {
                             onConfirm: () {
                               notesController.deleteNote(index);
                               Get.back();
-                              Get.snackbar(
-                                'Message',
-                                'Note deleted',
+                              final noteDeleteSnackBar = SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                content: const Text('Note deleted.'),
+                                action: SnackBarAction(
+                                  label: 'Close',
+                                  onPressed: () {},
+                                ),
                               );
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(noteDeleteSnackBar);
                             },
                           );
                         },
