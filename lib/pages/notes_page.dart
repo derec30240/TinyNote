@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/notes_controller.dart';
+import 'note_detail_page.dart';
 
 class NotesPage extends StatelessWidget {
   final NotesController notesController = Get.find();
@@ -29,7 +30,7 @@ class NotesPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ListTile(
                   onTap: () {
-                    //TODO: Move to the note_detail_page
+                    Get.to(() => NoteDetailPage(index: index));
                   },
                   title: Text(
                     notesController.notes[index].title,

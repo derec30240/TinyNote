@@ -73,7 +73,7 @@ class NoteEditPage extends StatelessWidget {
                   } else {
                     notesController.editNote(
                       notesController.notes
-                          .indexWhere((element) => element.titie == title),
+                          .indexWhere((element) => element.title == title),
                       titleController.text,
                       contentController.text,
                     );
