@@ -27,6 +27,7 @@ class NotesPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: notesController.notes.length,
               itemBuilder: (context, index) {
+                //FIXME: If the `notesSortOrder` is `dateLastEdited`, when finished edit, it may go back to another NoteDetailPage. Try not to use `index` to index the note, or maybe other solutions.
                 return ListTile(
                   onTap: () {
                     Get.to(() => NoteDetailPage(index: index));

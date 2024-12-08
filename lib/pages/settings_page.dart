@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 
 import '../common/constants.dart';
 import '../controllers/global_controller.dart';
+import '../controllers/notes_controller.dart';
 
 /// Displays the various settings that can be customized by the user.
 class SettingsPage extends StatelessWidget {
   SettingsPage({super.key});
 
   final GlobalController globalController = Get.find<GlobalController>();
+  final NotesController notesController = Get.find<NotesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class SettingsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Obx(() => Row(
+        child: Obx(() => ListView(
+              children: [
+                Row(
                   children: [
                     const Text('Theme Mode: '),
                     const SizedBox(width: 20.0),
@@ -43,8 +45,8 @@ class SettingsPage extends StatelessWidget {
                       onChanged: globalController.updateThemeMode,
                     ),
                   ],
-                )),
-            Obx(() => Row(
+                ),
+                Row(
                   children: [
                     const Text('Theme Color: '),
                     const SizedBox(width: 20.0),
@@ -93,9 +95,55 @@ class SettingsPage extends StatelessWidget {
                       onSelected: globalController.updateThemeColor,
                     ),
                   ],
-                ))
-          ],
-        ),
+                ),
+                Row(
+                  children: [
+                    const Text('Sort notes by: '),
+                    const SizedBox(width: 20.0),
+                    DropdownButton<String>(
+                      value: globalController.noteSortOrder.value,
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'dateCreated',
+                          child: Text('Date Created'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'dateLastEdited',
+                          child: Text('Date Last Edited'),
+                        ),
+                      ],
+                      onChanged: (sortOrder) {
+                        globalController.updateNoteSortOrder(sortOrder);
+                        notesController.sortNotes();
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text('Sort notes in: '),
+                    const SizedBox(width: 20.0),
+                    DropdownButton<bool>(
+                      value: globalController.noteSortAscending.value,
+                      items: const [
+                        DropdownMenuItem(
+                          value: true,
+                          child: Text('Ascending'),
+                        ),
+                        DropdownMenuItem(
+                          value: false,
+                          child: Text('Decending'),
+                        ),
+                      ],
+                      onChanged: (sortAscending) {
+                        globalController.updateNoteSortAscending(sortAscending);
+                        notesController.sortNotes();
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            )),
       ),
     );
   }
