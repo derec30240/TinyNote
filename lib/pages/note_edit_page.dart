@@ -18,7 +18,77 @@ class NoteEditPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    final TextEditingController titleController = (type != 'add')
+        ? TextEditingController(text: title)
+        : TextEditingController();
+    final TextEditingController contentController = (type != 'add')
+        ? TextEditingController(text: content)
+        : TextEditingController();
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        title: const Text('New Note'),
+      ),
+      body: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                maxLines: 1,
+                decoration: const InputDecoration(
+                  labelText: 'Title',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: TextField(
+                  controller: contentController,
+                  style: const TextStyle(height: 1.5),
+                  maxLines: null,
+                  expands: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Content',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              FilledButton(
+                onPressed: () {
+                  if (type == 'add') {
+                    notesController.addNote(
+                      titleController.text,
+                      contentController.text,
+                    );
+                    Get.back();
+                    Get.snackbar('Message', 'Note added.');
+                  } else {
+                    notesController.editNote(
+                      notesController.notes
+                          .indexWhere((element) => element.titie == title),
+                      titleController.text,
+                      contentController.text,
+                    );
+                    Get.back();
+                    Get.snackbar('Message', 'Note edited.');
+                  }
+                },
+                child: (type == 'add')
+                    ? const Text('Add Note')
+                    : const Text('Confirm Edit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
