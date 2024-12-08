@@ -8,8 +8,9 @@ class GlobalController extends GetxController {
 
   var themeMode = ThemeMode.system.obs;
   var themeColor = ColorSeed.baseColor.obs;
-
   var selectedHomeIndex = 0.obs;
+  var noteSortOrder = 'dateCreated'.obs;
+  var noteSortAscending = false.obs;
 
   void updateThemeMode(ThemeMode? newThemeMode) {
     if (newThemeMode == null) return;
@@ -25,10 +26,24 @@ class GlobalController extends GetxController {
     themeColor.value = ColorSeed.values[value];
   }
 
-  void updateHomeIndex(int? newHomeindex) {
+  void updateSelectedHomeIndex(int? newHomeindex) {
     if (newHomeindex == null) return;
     if (newHomeindex == selectedHomeIndex.value) return;
 
     selectedHomeIndex.value = newHomeindex;
+  }
+
+  void updateNoteSortOrder(String? newOrder) {
+    if (newOrder == null) return;
+    if (newOrder == noteSortOrder.value) return;
+
+    noteSortOrder.value = newOrder;
+  }
+
+  void updateNoteSortAscending(bool? newAscending) {
+    if (newAscending == null) return;
+    if (newAscending == noteSortAscending.value) return;
+
+    noteSortAscending.value = newAscending;
   }
 }

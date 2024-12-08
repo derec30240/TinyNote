@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         return NavigationBar(
           selectedIndex: globalController.selectedHomeIndex.value,
           onDestinationSelected: (index) {
-            globalController.updateHomeIndex(index);
+            globalController.updateSelectedHomeIndex(index);
           },
           destinations: appBarDestinations,
         );

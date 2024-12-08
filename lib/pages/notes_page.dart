@@ -13,19 +13,17 @@ class NotesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => (notesController.notes.isEmpty)
-        ? Container(
-            child: const Center(
-              child: Text(
-                'No notes yet.',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+        ? const Center(
+            child: Text(
+              'No notes yet.',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
               ),
             ),
           )
         : Container(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10),
             child: ListView.builder(
               itemCount: notesController.notes.length,
               itemBuilder: (context, index) {
