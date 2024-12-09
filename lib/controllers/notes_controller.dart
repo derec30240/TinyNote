@@ -9,6 +9,7 @@ import '../models/note.dart';
 class NotesController extends GetxController {
   static NotesController instance = Get.find();
   GlobalController globalController = Get.find();
+  
   List notes = <Note>[].obs;
 
   @override
