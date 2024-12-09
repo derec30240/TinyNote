@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../controllers/global_controller.dart';
 import '../controllers/notes_controller.dart';
 import 'note_detail_page.dart';
 
 class NotesPage extends StatelessWidget {
+  final GlobalController globalController = Get.find();
   final NotesController notesController = Get.find();
 
   NotesPage({super.key});
@@ -45,8 +47,10 @@ class NotesPage extends StatelessWidget {
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(DateFormat('yyyy-MM-dd HH:mm:ss')
-                          .format(notesController.notes[index].dateCreated)),
+                      Text(DateFormat('yyyy-MM-dd HH:mm:ss').format(
+                          globalController.noteSortOrder.value == 'dateCreated'
+                              ? notesController.notes[index].dateCreated
+                              : notesController.notes[index].dateLastEdited)),
                       IconButton(
                         onPressed: () {
                           Get.defaultDialog(

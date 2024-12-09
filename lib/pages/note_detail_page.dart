@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
+import '../controllers/global_controller.dart';
 import '../controllers/notes_controller.dart';
 import 'note_edit_page.dart';
 
 class NoteDetailPage extends StatelessWidget {
+  final GlobalController globalController = Get.find();
   final NotesController notesController = Get.find();
   final int index;
 
@@ -39,7 +42,9 @@ class NoteDetailPage extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: Text(
-                  'Last edited on ${notesController.notes[index].dateLastEdited}',
+                  globalController.noteSortOrder.value == 'dateCreated'
+                      ? 'Created on ${DateFormat('yyyy-MM-dd HH:mm:ss').format(notesController.notes[index].dateCreated)}'
+                      : 'Last edited on ${DateFormat('yyyy-MM-dd HH:mm:ss').format(notesController.notes[index].dateLastEdited)}',
                   style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     fontSize: 12,
