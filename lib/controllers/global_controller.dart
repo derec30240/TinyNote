@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../common/constants.dart';
+import 'package:tiny_note/common/constants.dart';
 
 class GlobalController extends GetxController {
   static GlobalController instance = Get.find();

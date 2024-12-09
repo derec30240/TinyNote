@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'about_page.dart';
-import '../controllers/global_controller.dart';
-import 'note_edit_page.dart';
-import 'notes_page.dart';
-import 'settings_page.dart';
-import 'tasks_page.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/pages/about_page.dart';
+import 'package:tiny_note/pages/note_edit_page.dart';
+import 'package:tiny_note/pages/notes_page.dart';
+import 'package:tiny_note/pages/settings_page.dart';
+import 'package:tiny_note/pages/tasks_page.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {

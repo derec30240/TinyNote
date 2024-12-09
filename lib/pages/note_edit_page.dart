@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/notes_controller.dart';
+import 'package:tiny_note/controllers/notes_controller.dart';
 
 class NoteEditPage extends StatelessWidget {
   final NotesController notesController = Get.find();

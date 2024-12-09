@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'controllers/global_controller.dart';
-import 'controllers/notes_controller.dart';
-import 'pages/home_page.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/controllers/notes_controller.dart';
+import 'package:tiny_note/pages/home_page.dart';
 
 /// The Widget that configures the application.
 class MyApp extends StatelessWidget {

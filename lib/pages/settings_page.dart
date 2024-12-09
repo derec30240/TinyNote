@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../common/constants.dart';
-import '../controllers/global_controller.dart';
-import '../controllers/notes_controller.dart';
+import 'package:tiny_note/common/constants.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/controllers/notes_controller.dart';
 
 /// Displays the various settings that can be customized by the user.
 class SettingsPage extends StatelessWidget {

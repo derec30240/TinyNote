@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'global_controller.dart';
-import '../models/note.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/models/note.dart';
 
 class NotesController extends GetxController {
   static NotesController instance = Get.find();
   GlobalController globalController = Get.find();
-  
+
   List notes = <Note>[].obs;
 
   @override

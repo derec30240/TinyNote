@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../controllers/global_controller.dart';
-import '../controllers/notes_controller.dart';
-import 'note_edit_page.dart';
+import 'package:tiny_note/controllers/global_controller.dart';
+import 'package:tiny_note/controllers/notes_controller.dart';
+import 'package:tiny_note/pages/note_edit_page.dart';
 
 class NoteDetailPage extends StatelessWidget {
   final GlobalController globalController = Get.find();
