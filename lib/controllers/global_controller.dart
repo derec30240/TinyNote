@@ -28,7 +28,7 @@ class GlobalController extends GetxController {
         (seed) => seed.label == prefs.getString('themeColor'),
         orElse: () => ColorSeed.baseColor);
     selectedHomeIndex.value = prefs.getInt('selectedHomeIndex') ?? 0;
-    noteSortOrder.value = prefs.getString('noteSortOrder') ?? 'dateCreatd';
+    noteSortOrder.value = prefs.getString('noteSortOrder') ?? 'dateCreated';
     noteSortAscending.value = prefs.getBool('noteSortAscending') ?? false;
   }
 
