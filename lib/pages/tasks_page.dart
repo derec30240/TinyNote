@@ -6,13 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tiny_note/controllers/task_conotroller.dart';
 import 'package:tiny_note/models/task_model.dart';
-import 'package:tiny_note/controllers/global_controller.dart';
-import 'package:tiny_note/pages/about_page.dart';
 import 'package:tiny_note/pages/addtask_page.dart';
-import 'package:tiny_note/pages/note_edit_page.dart';
-import 'package:tiny_note/pages/notes_page.dart';
-import 'package:tiny_note/pages/settings_page.dart';
-import 'package:tiny_note/pages/tasks_page.dart';
 
 //backgroundColor: Theme.of(context).colorScheme.primary,
 //foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -89,7 +83,7 @@ class _TaskPageState extends State<TaskPage> {
                     )
                   ],
                 ), 
-                //向左划打开删除的标题
+                //silde to the lift and open the delete button
                 endActionPane: ActionPane(
                   motion: DrawerMotion(),
                   extentRatio: 0.25,
@@ -115,17 +109,17 @@ class _TaskPageState extends State<TaskPage> {
 //        backgroundColor: Theme.of(context).colorScheme.primary,
 //        foregroundColor: Colors.white,
 //        onPressed: (){
-//          //跳转页面到编辑界面
+//          //turn to edit page
 //          Get.to(() => AddTaskScreen());
 //        },
 //        child: Icon(Icons.add),
 //      ),
     ); 
   }
-  //每个任务对应的任务卡
+  //every task have its owm card showed on the page
   Widget taskCard(Task task, int index) {
     return Card(
-      elevation: 7,//设置 阴影的大小
+      elevation: 7,//set the size of shade
       color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -163,9 +157,9 @@ class _TaskPageState extends State<TaskPage> {
             ),
             Divider(),
             Text(
-              '${task.dueDate!.toLocal()}'.split(' ')[0],//把日期分开？
+              '${task.dueDate!.toLocal()}'.split(' ')[0],//spilt the datedata
               style: TextStyle(
-                color: Colors.deepPurple,
+                color: Theme.of(context).colorScheme.onPrimary,
                 fontWeight: FontWeight.w500,
                 decoration: 
                   task.isCompleted
