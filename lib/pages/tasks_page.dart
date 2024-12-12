@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -17,14 +17,20 @@ import 'package:tiny_note/pages/tasks_page.dart';
 //backgroundColor: Theme.of(context).colorScheme.primary,
 //foregroundColor: Theme.of(context).colorScheme.onPrimary,
 
+class TaskPage extends StatefulWidget {
+  const TaskPage({super.key});
 
-class TasksPage extends StatelessWidget {
-  
-  final TaskController taskController = Get.put(TaskController());
+  @override
+  State<TaskPage> createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
+  @override
+   final TaskController taskController = Get.put(TaskController());
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
@@ -37,7 +43,7 @@ class TasksPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10 , vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 20),
         //响应式编程，具体原理没明白，反正很有用
         child: Obx((){
           return TaskController.taskList.isEmpty ? Center(
@@ -105,15 +111,15 @@ class TasksPage extends StatelessWidget {
           );
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Colors.white,
-        onPressed: (){
-          //跳转页面到编辑界面
-          Get.to(() => AddTaskScreen());
-        },
-        child: Icon(Icons.add),
-      ),
+//      floatingActionButton: FloatingActionButton(
+//        backgroundColor: Theme.of(context).colorScheme.primary,
+//        foregroundColor: Colors.white,
+//        onPressed: (){
+//          //跳转页面到编辑界面
+//          Get.to(() => AddTaskScreen());
+//        },
+//        child: Icon(Icons.add),
+//      ),
     ); 
   }
   //每个任务对应的任务卡
@@ -184,3 +190,7 @@ class TasksPage extends StatelessWidget {
     );
   }
 }
+
+//class TasksPage extends StatelessWidget {
+// TasksPage({super.key});
+//}

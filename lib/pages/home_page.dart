@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/pages/about_page.dart';
+import 'package:tiny_note/pages/addtask_page.dart';
 import 'package:tiny_note/pages/note_edit_page.dart';
 import 'package:tiny_note/pages/notes_page.dart';
 import 'package:tiny_note/pages/settings_page.dart';
 import 'package:tiny_note/pages/tasks_page.dart';
+ 
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -34,7 +36,7 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           (globalController.selectedHomeIndex.value == 0)
               ? Get.to(() => NoteEditPage(type: 'add', title: '', content: ''))
-              : Get.to(() => const Placeholder());
+              : Get.to(() => AddTaskScreen());
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -123,7 +125,7 @@ class HomePage extends StatelessWidget {
   Widget _body() {
     switch (globalController.selectedHomeIndex.value) {
       case 1:
-        return TasksPage();
+        return TaskPage();
       case 0:
       default:
         return NotesPage();

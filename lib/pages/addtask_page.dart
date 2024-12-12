@@ -1,17 +1,14 @@
 
-// ignore_for_file: unused_import
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tiny_note/controllers/task_conotroller.dart';
 import 'package:tiny_note/models/task_model.dart';
-import 'package:tiny_note/controllers/global_controller.dart';
-import 'package:tiny_note/pages/about_page.dart';
-import 'package:tiny_note/pages/note_edit_page.dart';
-import 'package:tiny_note/pages/notes_page.dart';
-import 'package:tiny_note/pages/settings_page.dart';
+import 'package:tiny_note/pages/home_page.dart';
 import 'package:tiny_note/pages/tasks_page.dart';
+
 
 
 class AddTaskScreen extends StatefulWidget {
@@ -173,13 +170,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     );
                   }else{
                     //添加新任务
+                    
                     var newTask = Task(
                       title: titleController.text,
                       description: descriptionController.text ,
                       dueDate: selectedDate!,
                       //isCompleted: widget.task!.isCompleted,
                       );
-                    taskController.addTask(newTask);
+                    taskController.addTask(newTask);                   
                     Get.back();
                     Get.snackbar(
                       "Success", "Task Added Successfully",
