@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/controllers/notes_controller.dart';
+import 'package:tiny_note/controllers/task_conotroller.dart';
 import 'package:tiny_note/pages/home_page.dart';
 
 /// The Widget that configures the application.
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
 
   final GlobalController globalController = Get.put(GlobalController());
   final NotesController notesController = Get.put(NotesController());
+  final TaskController taskController = Get.put(TaskController());
 
   ThemeData _buildTheme(Brightness brightness) {
     return ThemeData(

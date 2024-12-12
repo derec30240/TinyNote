@@ -1,46 +1,56 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
-import 'package:tiny_note/models/task_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:tiny_note/models/task.dart';
 
+class TaskController extends GetxController {
+  List tasks = <Task>[].obs;
 
-class TaskController extends GetxController{
-  static var taskList = <Task>[].obs;
-  
   @override
-  void onInit(){
+  void onInit() {
     super.onInit();
-    openBox();
-  }
-  //open hive database of todoTasks box  
-  void openBox()async{
-    var box  = await Hive.openBox<Task>("todoTasks");
-    taskList.addAll(box.values);
-  }
-  //add task to hive datebase
-  void addTask(Task task)async{
-    var box = Hive.box<Task>('todoTasks');
-    await box.add(task);
-    taskList.add(task);
-
-  }
-  //delete task to hive database
-  static void deleteTask(int index){
-    var box = Hive.box<Task>('todoTasks');
-    box.deleteAt(index);
-    taskList.remove(index);
-
-  }
-  //edit task to hive database
-  void editTask(int index, Task newTask){
-    var box = Hive.box<Task>('todoTasks');
-    box.putAt(index, newTask);
-    taskList[index] = newTask;
-
+    _loadTasks();
   }
 
-  void toggleTaskCompletion (int index , Task newTask)async{
-    taskList[index].isCompleted = !taskList[index].isCompleted;
-    taskList.refresh();
+  Future<void> _loadTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('tasks')) {
+      List<String> tasksStringList = prefs.getStringList('tasks')!;
+      tasks.assignAll(tasksStringList
+          .map((taskString) => Task.fromJson(json.decode(taskString)))
+          .toList());
+    }
+  }
+
+  Future<void> _saveTasks() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> taskStringList =
+        tasks.map((task) => json.encode(task.toJson())).toList();
+    prefs.setStringList('tasks', taskStringList);
+  }
+
+  void addTask(Task task) {
+    tasks.add(task);
+    update();
+    _saveTasks();
+  }
+
+  void deleteTask(int index) {
+    tasks.removeAt(index);
+    update();
+    _saveTasks();
+  }
+
+  void editTask(int index, Task newTask) {
+    tasks[index] = newTask;
+    update();
+    _saveTasks();
+  }
+
+  void toggleTaskCompletion(int index) {
+    tasks[index].isCompleted = !tasks[index].isCompleted;
+    _saveTasks();
   }
 }

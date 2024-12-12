@@ -1,13 +1,7 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tiny_note/controllers/task_conotroller.dart';
-import 'package:tiny_note/models/task_model.dart';
-import 'package:tiny_note/pages/home_page.dart';
-import 'package:tiny_note/pages/tasks_page.dart';
+import 'package:tiny_note/models/task.dart';
 
 
 
@@ -40,7 +34,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.initState();
     if(widget.task != null){
       titleController.text = widget.task!.title; 
-      descriptionController.text = widget.task!.description;
+      descriptionController.text = widget.task!.content;
       selectedDate = widget.task!.dueDate;
     }
   }
@@ -157,7 +151,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   if(widget.task != null){
                     var updateTask = Task(
                       title: titleController.text,
-                      description: descriptionController.text ,
+                      content: descriptionController.text ,
                       dueDate: selectedDate!,
                       isCompleted: widget.task!.isCompleted,
                       );
@@ -173,7 +167,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     
                     var newTask = Task(
                       title: titleController.text,
-                      description: descriptionController.text ,
+                      content: descriptionController.text ,
                       dueDate: selectedDate!,
                       //isCompleted: widget.task!.isCompleted,
                       );
