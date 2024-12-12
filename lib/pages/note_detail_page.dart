@@ -76,6 +76,7 @@ class NoteDetailPage extends StatelessWidget {
               title: notesController.notes[index].title,
               content: notesController.notes[index].content));
         },
+        
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         child: const Icon(Icons.edit),
