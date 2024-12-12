@@ -13,7 +13,7 @@ import 'package:tiny_note/pages/tasks_page.dart';
 
 class AddTaskScreen extends StatefulWidget {
 
-  final Task  ? task;
+  final Task ? task;
   final int ? index;
   const AddTaskScreen({
     super.key,
@@ -47,7 +47,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //一个页面同时实现添加或者编辑任务
+    //one page, two fuction
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AppBar(
@@ -69,7 +69,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               style:  TextStyle(fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 10,),
-            //设置输入文字的区域
+            //set the region of typing information
             TextField(
               controller: titleController,
               decoration: InputDecoration(
@@ -85,7 +85,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               style:  TextStyle(fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 10,),
-            //设置输入文字的区域
+            //set the region of typing information
             TextField(
               controller: descriptionController,
               decoration: InputDecoration(
@@ -123,7 +123,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               },
             ),
             SizedBox(height: 30,),
-            //设置“ADDTASK”按钮
+            //set "add task" button
             Center(
               child: ElevatedButton(
                 style:ElevatedButton.styleFrom(
