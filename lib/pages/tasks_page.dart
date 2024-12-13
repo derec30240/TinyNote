@@ -105,7 +105,7 @@ class TaskPage extends StatelessWidget {
             ),
             const Divider(),
             Text(
-              '${task.dueDate.toLocal()}'.split(' ')[0], //spilt the datedata
+              '${task.dueDate.toLocal()}'.substring(0, 16),
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 decoration:
