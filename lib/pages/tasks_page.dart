@@ -37,23 +37,8 @@ class _TaskPageState extends State<TaskPage> {
                 Task task = taskController.tasks[index];
                 return Slidable(
                   key: ValueKey(index),
-                  startActionPane: ActionPane(
-                    motion: const DrawerMotion(),
-                    extentRatio: 0.25,
-                    children: [
-                      SlidableAction(
-                        borderRadius: BorderRadius.circular(15),
-                        autoClose: true,
-                        onPressed: (context) => Get.to(() => TaskEditPage(
-                              task: task,
-                              index: index,
-                            )),
-                        icon: Icons.edit,
-                        label: 'Edit',
-                      ),
-                    ],
-                  ),
                   endActionPane: ActionPane(
+                    extentRatio: 0.25,
                     motion: const DrawerMotion(),
                     children: [
                       SlidableAction(
@@ -69,7 +54,7 @@ class _TaskPageState extends State<TaskPage> {
                     ],
                   ),
                   child: taskCard(task, index),
-                ).animate().fade().slide(duration: 300.ms);
+                ).animate().fade().slide(duration: Duration(milliseconds: 300));
               },
             ),
           ));
@@ -78,12 +63,15 @@ class _TaskPageState extends State<TaskPage> {
   /// Every task have its owm card showed on the page.
   Widget taskCard(Task task, int index) {
     return Card(
-      elevation: 7, //set the size of shade
-      color: Colors.white,
-      margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
         contentPadding: const EdgeInsets.all(20),
+        onTap: () {
+          Get.to(() => TaskEditPage(
+                task: task,
+                index: index,
+              ));
+        },
         leading: IconButton(
           onPressed: () {
             taskController.toggleTaskCompletion(index);
@@ -102,23 +90,26 @@ class _TaskPageState extends State<TaskPage> {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
             Text(
               task.content,
               style: TextStyle(
-                color: Colors.grey.shade600,
                 decoration:
                     task.isCompleted ? TextDecoration.lineThrough : null,
               ),
             ),
             const Divider(),
-            Text(
-              '${task.dueDate.toLocal()}'.substring(0, 16),
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                decoration:
-                    task.isCompleted ? TextDecoration.lineThrough : null,
-              ),
+            Row(
+              children: [
+                Text(
+                  '${task.dueDate.toLocal()}'.substring(0, 16),
+                  style: TextStyle(
+                    decoration:
+                        task.isCompleted ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Icon(Icons.alarm),
+              ],
             ),
           ],
         ),

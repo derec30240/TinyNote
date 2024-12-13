@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/controllers/notes_controller.dart';
@@ -36,6 +36,7 @@ class NotesPage extends StatelessWidget {
                 return Slidable(
                   key: ValueKey(index),
                   endActionPane: ActionPane(
+                    extentRatio: 0.25,
                     motion: const DrawerMotion(),
                     children: [
                       SlidableAction(
@@ -73,7 +74,7 @@ class NotesPage extends StatelessWidget {
                     ],
                   ),
                   child: noteCard(context, note, index),
-                );
+                ).animate().fade().slide(duration: Duration(milliseconds: 300));
               },
             ),
           ));
@@ -81,7 +82,9 @@ class NotesPage extends StatelessWidget {
 
   Widget noteCard(BuildContext context, Note note, int index) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
+        contentPadding: const EdgeInsets.all(20),
         onTap: () {
           Get.to(() => NoteDetailPage(index: index));
         },
@@ -99,10 +102,9 @@ class NotesPage extends StatelessWidget {
               maxLines: 1,
             ),
             const Divider(),
-            Text(DateFormat('yyyy-MM-dd HH:mm:ss').format(
-                globalController.noteSortOrder.value == 'dateCreated'
-                    ? note.dateCreated
-                    : note.dateLastEdited)),
+            Text(
+                '${(globalController.noteSortOrder.value == 'dateCreated' ? note.dateCreated : note.dateLastEdited).toLocal()}'
+                    .substring(0, 16)),
           ],
         ),
       ),
