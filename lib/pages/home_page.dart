@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/pages/about_page.dart';
-import 'package:tiny_note/pages/addtask_page.dart';
+import 'package:tiny_note/pages/task_edit_page.dart';
 import 'package:tiny_note/pages/note_edit_page.dart';
 import 'package:tiny_note/pages/notes_page.dart';
 import 'package:tiny_note/pages/settings_page.dart';
 import 'package:tiny_note/pages/tasks_page.dart';
- 
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -32,11 +31,10 @@ class HomePage extends StatelessWidget {
         );
       }),
       floatingActionButton: FloatingActionButton(
-        //TODO: Enable to create new note or task.
         onPressed: () {
           (globalController.selectedHomeIndex.value == 0)
               ? Get.to(() => NoteEditPage(type: 'add', title: '', content: ''))
-              : Get.to(() => AddTaskScreen());
+              : Get.to(() => TaskEditPage());
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,

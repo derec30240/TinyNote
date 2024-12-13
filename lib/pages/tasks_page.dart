@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/task_conotroller.dart';
 import 'package:tiny_note/models/task.dart';
-import 'package:tiny_note/pages/addtask_page.dart';
+import 'package:tiny_note/pages/task_edit_page.dart';
 
 class TaskPage extends StatelessWidget {
   final TaskController taskController = Get.find();
@@ -39,7 +39,7 @@ class TaskPage extends StatelessWidget {
                       SlidableAction(
                         borderRadius: BorderRadius.circular(15),
                         autoClose: true,
-                        onPressed: (context) => Get.to(() => AddTaskScreen(
+                        onPressed: (context) => Get.to(() => TaskEditPage(
                               task: task,
                               index: index,
                             )),
