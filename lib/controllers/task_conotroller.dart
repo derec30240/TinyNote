@@ -51,6 +51,7 @@ class TaskController extends GetxController {
 
   void toggleTaskCompletion(int index) {
     tasks[index].isCompleted = !tasks[index].isCompleted;
+    update();
     _saveTasks();
   }
 }

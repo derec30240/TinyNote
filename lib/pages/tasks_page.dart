@@ -7,10 +7,15 @@ import 'package:tiny_note/controllers/task_conotroller.dart';
 import 'package:tiny_note/models/task.dart';
 import 'package:tiny_note/pages/task_edit_page.dart';
 
-class TaskPage extends StatelessWidget {
-  final TaskController taskController = Get.find();
+class TaskPage extends StatefulWidget {
+  const TaskPage({super.key});
 
-  TaskPage({super.key});
+  @override
+  State<TaskPage> createState() => _TaskPageState();
+}
+
+class _TaskPageState extends State<TaskPage> {
+  final TaskController taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +85,10 @@ class TaskPage extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(20),
         leading: IconButton(
-          onPressed: () => taskController.toggleTaskCompletion(index),
+          onPressed: () {
+            taskController.toggleTaskCompletion(index);
+            setState(() {});
+          },
           icon: Icon(task.isCompleted ? Icons.task_alt : Icons.circle_outlined),
           color: task.isCompleted ? Colors.green : Colors.grey,
         ),

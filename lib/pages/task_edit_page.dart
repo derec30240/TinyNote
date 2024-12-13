@@ -159,11 +159,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
                     behavior: SnackBarBehavior.floating,
                     content: const Text(
                         'Fail to add the task. Please fill in all fields.'),
-                    action: SnackBarAction(label: 'CLose', onPressed: () {}),
+                    action: SnackBarAction(label: 'Close', onPressed: () {}),
                   );
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                   ScaffoldMessenger.of(context)
                       .showSnackBar(taskAddFailSnackBar);
+                  return;
                 }
                 if (widget.task == null) {
                   taskController.addTask(Task(
