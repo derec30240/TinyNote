@@ -8,6 +8,9 @@ import 'package:tiny_note/pages/note_edit_page.dart';
 import 'package:tiny_note/pages/notes_page.dart';
 import 'package:tiny_note/pages/settings_page.dart';
 import 'package:tiny_note/pages/tasks_page.dart';
+import 'package:tiny_note/models/search_model.dart';
+ 
+
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -18,7 +21,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      appBar: _appBar(context),
       drawer: _drawer(context),
       body: SafeArea(child: Obx(() => _body())),
       bottomNavigationBar: Obx(() {
@@ -44,7 +47,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _appBar() {
+  PreferredSizeWidget _appBar(context) {
     return AppBar(
       title: const Text('Tiny Note'),
       actions: [
@@ -62,7 +65,12 @@ class HomePage extends StatelessWidget {
         IconButton(
           tooltip: 'Search',
           //TODO: Enable to search for notes and tasks.
-          onPressed: () {},
+          onPressed: () {
+            showSearch(
+              context: context, 
+              delegate: DataSearch(),
+            );
+          },
           icon: const Icon(Icons.search),
         ),
       ],
