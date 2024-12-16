@@ -11,6 +11,7 @@ class NotesController extends GetxController {
   GlobalController globalController = Get.find();
 
   List notes = <Note>[].obs;
+  List<String> get noteTitles => [for (Note note in notes) note.title];
 
   @override
   void onInit() {
