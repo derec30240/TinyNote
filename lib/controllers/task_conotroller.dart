@@ -7,6 +7,7 @@ import 'package:tiny_note/models/task.dart';
 
 class TaskController extends GetxController {
   List tasks = <Task>[].obs;
+  List<String> get taskTitles => [for (Task task in tasks) task.title];
 
   @override
   void onInit() {

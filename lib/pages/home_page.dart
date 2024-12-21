@@ -8,9 +8,7 @@ import 'package:tiny_note/pages/note_edit_page.dart';
 import 'package:tiny_note/pages/notes_page.dart';
 import 'package:tiny_note/pages/settings_page.dart';
 import 'package:tiny_note/pages/tasks_page.dart';
-import 'package:tiny_note/models/search_model.dart';
- 
-
+import 'package:tiny_note/services/data_search.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -67,7 +65,7 @@ class HomePage extends StatelessWidget {
           //TODO: Enable to search for notes and tasks.
           onPressed: () {
             showSearch(
-              context: context, 
+              context: context,
               delegate: DataSearch(),
             );
           },
