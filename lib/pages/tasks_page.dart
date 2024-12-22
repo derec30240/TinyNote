@@ -49,7 +49,7 @@ class TaskPage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: taskCard(context, task, index),
+              child: TaskCard(task: task, index: index),
             ).animate().fade().slide(duration: Duration(milliseconds: 300));
           },
         ),

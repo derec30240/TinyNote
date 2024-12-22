@@ -124,10 +124,9 @@ class DataSearch extends SearchDelegate<String> {
               (BuildContext context, int index) {
                 int taskIndex = _taskController.tasks.indexWhere((task) =>
                     task.title?.toLowerCase() == taskList[index].toLowerCase());
-                return taskCard(
-                  context,
-                  _taskController.tasks[taskIndex],
-                  taskIndex,
+                return TaskCard(
+                  task: _taskController.tasks[taskIndex],
+                  index: taskIndex,
                 );
               },
               childCount: taskList.length,
