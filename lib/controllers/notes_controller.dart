@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/models/note.dart';
@@ -39,7 +40,9 @@ class NotesController extends GetxController {
   }
 
   void addNote(String title, String content) {
+    Uuid uuid = const Uuid();
     notes.add(Note(
+      uuid: uuid.v4(),
       title: title,
       content: content,
       dateCreated: DateTime.now(),
@@ -49,22 +52,23 @@ class NotesController extends GetxController {
     _saveNotes();
   }
 
-  void deleteNote(Note note) {
-    int index = notes.indexOf(note);
-    if (index != -1) {
-      notes.removeAt(index);
-    }
+  void deleteNote(String uuid) {
+    notes.removeWhere((note) => note.uuid == uuid);
     update();
     _saveNotes();
   }
 
-  void editNote(int index, String title, String content) {
-    Note oldNote = notes[index];
-    notes[index] = Note(
-        title: title,
-        content: content,
-        dateCreated: oldNote.dateCreated,
-        dateLastEdited: DateTime.now());
+  void editNote(String uuid, String title, String content) {
+    int index = notes.indexWhere((note) => note.uuid == uuid);
+    if (index != -1) {
+      Note oldNote = notes[index];
+      notes[index] = Note(
+          uuid: oldNote.uuid,
+          title: title,
+          content: content,
+          dateCreated: oldNote.dateCreated,
+          dateLastEdited: DateTime.now());
+    }
     update();
     _saveNotes();
   }

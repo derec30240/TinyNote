@@ -33,9 +33,18 @@ class HomePage extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          (globalController.selectedHomeIndex.value == 0)
-              ? Get.to(() => NoteEditPage(type: 'add', title: '', content: ''))
-              : Get.to(() => TaskEditPage());
+          switch (globalController.selectedHomeIndex.value) {
+            case 1:
+              Get.to(() => TaskEditPage(uuid: ''));
+            case 0:
+            default:
+              Get.to(() => NoteEditPage(
+                    type: 'add',
+                    uuid: '',
+                    title: '',
+                    content: '',
+                  ));
+          }
         },
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
@@ -62,7 +71,6 @@ class HomePage extends StatelessWidget {
         }),
         IconButton(
           tooltip: 'Search',
-          //TODO: Enable to search for notes and tasks.
           onPressed: () {
             showSearch(
               context: context,

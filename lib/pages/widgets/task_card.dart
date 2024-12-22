@@ -6,12 +6,10 @@ import 'package:tiny_note/pages/task_edit_page.dart';
 import 'package:tiny_note/controllers/task_conotroller.dart';
 
 class TaskCard extends StatefulWidget {
-  final Task task;
-  final int index;
+  final String uuid;
   const TaskCard({
     super.key,
-    required this.task,
-    required this.index,
+    required this.uuid,
   });
 
   @override
@@ -23,50 +21,49 @@ class _TaskCardState extends State<TaskCard> {
 
   @override
   Widget build(BuildContext context) {
+    Task task = taskController
+        .tasks[taskController.tasks.indexWhere((t) => t.uuid == widget.uuid)];
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
         contentPadding: const EdgeInsets.all(20),
         onTap: () {
-          Get.to(() => TaskEditPage(
-                task: widget.task,
-                index: widget.index,
-              ));
+          Get.to(() => TaskEditPage(uuid: widget.uuid));
         },
         leading: IconButton(
           onPressed: () {
-            taskController.toggleTaskCompletion(widget.index);
+            taskController.toggleTaskCompletion(widget.uuid);
             setState(() {});
           },
           icon: Icon(
-              widget.task.isCompleted ? Icons.task_alt : Icons.circle_outlined),
-          color: widget.task.isCompleted ? Colors.green : Colors.grey,
+              task.isCompleted ? Icons.task_alt : Icons.circle_outlined),
+          color: task.isCompleted ? Colors.green : Colors.grey,
         ),
         title: Text(
-          widget.task.title,
+          task.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             decoration:
-                widget.task.isCompleted ? TextDecoration.lineThrough : null,
+                task.isCompleted ? TextDecoration.lineThrough : null,
           ),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.task.content,
+              task.content,
               style: TextStyle(
                 decoration:
-                    widget.task.isCompleted ? TextDecoration.lineThrough : null,
+                    task.isCompleted ? TextDecoration.lineThrough : null,
               ),
             ),
             const Divider(),
             Row(
               children: [
                 Text(
-                  '${widget.task.dueDate.toLocal()}'.substring(0, 16),
+                  '${task.dueDate.toLocal()}'.substring(0, 16),
                   style: TextStyle(
-                    decoration: widget.task.isCompleted
+                    decoration: task.isCompleted
                         ? TextDecoration.lineThrough
                         : null,
                   ),

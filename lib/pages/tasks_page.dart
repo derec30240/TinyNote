@@ -4,7 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/task_conotroller.dart';
-import 'package:tiny_note/models/task.dart';
 import 'package:tiny_note/pages/widgets/task_card.dart';
 
 class TaskPage extends StatelessWidget {
@@ -31,7 +30,7 @@ class TaskPage extends StatelessWidget {
         child: ListView.builder(
           itemCount: taskController.tasks.length,
           itemBuilder: (context, index) {
-            Task task = taskController.tasks[index];
+            String uuid = taskController.tasks[index].uuid;
             return Slidable(
               key: ValueKey(index),
               endActionPane: ActionPane(
@@ -41,7 +40,7 @@ class TaskPage extends StatelessWidget {
                   SlidableAction(
                     borderRadius: BorderRadius.circular(15),
                     autoClose: true,
-                    onPressed: (context) => taskController.deleteTask(index),
+                    onPressed: (context) => taskController.deleteTask(uuid),
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     icon: Icons.delete,
@@ -49,7 +48,7 @@ class TaskPage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: TaskCard(task: task, index: index),
+              child: TaskCard(uuid: uuid),
             ).animate().fade().slide(duration: Duration(milliseconds: 300));
           },
         ),

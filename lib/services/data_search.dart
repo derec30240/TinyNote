@@ -90,10 +90,11 @@ class DataSearch extends SearchDelegate<String> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 return NoteCard(
-                  note: _notesController.notes[_notesController.notes
-                      .indexWhere((note) =>
+                  uuid: _notesController
+                      .notes[_notesController.notes.indexWhere((note) =>
                           note.title?.toLowerCase() ==
-                          noteList[index].toLowerCase())],
+                          noteList[index].toLowerCase())]
+                      .uuid,
                 );
               },
               childCount: noteList.length,
@@ -123,8 +124,7 @@ class DataSearch extends SearchDelegate<String> {
                 int taskIndex = _taskController.tasks.indexWhere((task) =>
                     task.title?.toLowerCase() == taskList[index].toLowerCase());
                 return TaskCard(
-                  task: _taskController.tasks[taskIndex],
-                  index: taskIndex,
+                  uuid: _taskController.tasks[taskIndex].uuid,
                 );
               },
               childCount: taskList.length,

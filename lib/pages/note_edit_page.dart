@@ -6,12 +6,14 @@ import 'package:tiny_note/controllers/notes_controller.dart';
 class NoteEditPage extends StatelessWidget {
   final NotesController notesController = Get.find();
   final String type;
+  final String uuid;
   final String title;
   final String content;
 
   NoteEditPage({
     super.key,
     required this.type,
+    required this.uuid,
     required this.title,
     required this.content,
   });
@@ -80,8 +82,7 @@ class NoteEditPage extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(noteAddSnackBar);
                 } else {
                   notesController.editNote(
-                    notesController.notes
-                        .indexWhere((element) => element.title == title),
+                    uuid,
                     titleController.text,
                     contentController.text,
                   );
@@ -95,13 +96,10 @@ class NoteEditPage extends StatelessWidget {
                     ),
                   );
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(noteEditSnackBar);
+                  ScaffoldMessenger.of(context).showSnackBar(noteEditSnackBar);
                 }
               },
-              child: (type == 'add')
-                  ? const Text('Add Note')
-                  : const Text('Confirm Edit'),
+              child: Text((type == 'add') ? 'Add Note' : 'Confirm Edit'),
             ),
           ],
         ),

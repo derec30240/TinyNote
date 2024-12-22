@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/global_controller.dart';
 import 'package:tiny_note/controllers/notes_controller.dart';
-import 'package:tiny_note/models/note.dart';
 import 'package:tiny_note/pages/widgets/note_card.dart';
 
 class NotesPage extends StatelessWidget {
@@ -31,8 +30,7 @@ class NotesPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: notesController.notes.length,
               itemBuilder: (context, index) {
-                //FIXME: If the `notesSortOrder` is `dateLastEdited`, when finished edit, it may go back to another NoteDetailPage. Try not to use `index` to index the note, or maybe other solutions.
-                Note note = notesController.notes[index];
+                String uuid = notesController.notes[index].uuid;
                 return Slidable(
                   key: ValueKey(index),
                   endActionPane: ActionPane(
@@ -50,7 +48,7 @@ class NotesPage extends StatelessWidget {
                             textConfirm: 'Yes',
                             textCancel: 'No',
                             onConfirm: () {
-                              notesController.deleteNote(note);
+                              notesController.deleteNote(uuid);
                               Get.back();
                               final noteDeleteSnackBar = SnackBar(
                                 behavior: SnackBarBehavior.floating,
@@ -73,7 +71,7 @@ class NotesPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: NoteCard(note: note),
+                  child: NoteCard(uuid: uuid),
                 ).animate().fade().slide(duration: Duration(milliseconds: 300));
               },
             ),

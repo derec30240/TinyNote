@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:tiny_note/models/task.dart';
 
@@ -32,25 +33,41 @@ class TaskController extends GetxController {
     prefs.setStringList('tasks', taskStringList);
   }
 
-  void addTask(Task task) {
-    tasks.add(task);
+  void addTask(String title, String content, DateTime dueDate) {
+    Uuid uuid = const Uuid();
+    tasks.add(Task(
+      uuid: uuid.v4(),
+      title: title,
+      content: content,
+      dueDate: dueDate,
+    ));
     update();
     _saveTasks();
   }
 
-  void deleteTask(int index) {
-    tasks.removeAt(index);
+  void deleteTask(String uuid) {
+    tasks.removeWhere((task) => task.uuid == uuid);
     update();
     _saveTasks();
   }
 
-  void editTask(int index, Task newTask) {
-    tasks[index] = newTask;
+  void editTask(String uuid, String title, String content, DateTime dueDate) {
+    int index = tasks.indexWhere((task) => task.uuid == uuid);
+    if (index != -1) {
+      Task oldTask = tasks[index];
+      tasks[index] = Task(
+        uuid: oldTask.uuid,
+        title: title,
+        content: content,
+        dueDate: dueDate,
+      );
+    }
     update();
     _saveTasks();
   }
 
-  void toggleTaskCompletion(int index) {
+  void toggleTaskCompletion(String uuid) {
+    int index = tasks.indexWhere((task) => task.uuid == uuid);
     tasks[index].isCompleted = !tasks[index].isCompleted;
     update();
     _saveTasks();

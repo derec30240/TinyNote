@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:tiny_note/controllers/task_conotroller.dart';
-import 'package:tiny_note/models/task.dart';
 
 class TaskEditPage extends StatefulWidget {
-  final Task? task;
-  final int? index;
+  final String uuid;
 
   const TaskEditPage({
     super.key,
-    this.index,
-    this.task,
+    required this.uuid,
   });
 
   @override
@@ -27,10 +24,12 @@ class _TaskEditPageState extends State<TaskEditPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.task != null) {
-      titleController.text = widget.task!.title;
-      contentController.text = widget.task!.content;
-      selectedDate = widget.task!.dueDate;
+    if (widget.uuid != '') {
+      int index =
+          taskController.tasks.indexWhere((task) => task.uuid == widget.uuid);
+      titleController.text = taskController.tasks[index].title;
+      contentController.text = taskController.tasks[index].content;
+      selectedDate = taskController.tasks[index].dueDate;
     }
   }
 
@@ -44,7 +43,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
           },
           icon: const Icon(Icons.arrow_back),
         ),
-        title: Text(widget.task == null ? 'New task' : 'Edit task'),
+        title: Text(widget.uuid == '' ? 'New task' : 'Edit task'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -166,11 +165,9 @@ class _TaskEditPageState extends State<TaskEditPage> {
                       .showSnackBar(taskAddFailSnackBar);
                   return;
                 }
-                if (widget.task == null) {
-                  taskController.addTask(Task(
-                      title: titleController.text,
-                      content: contentController.text,
-                      dueDate: selectedDate!));
+                if (widget.uuid == '') {
+                  taskController.addTask(titleController.text,
+                      contentController.text, selectedDate!);
                   Get.back();
                   final taskAddSnackBar = SnackBar(
                     behavior: SnackBarBehavior.floating,
@@ -181,12 +178,11 @@ class _TaskEditPageState extends State<TaskEditPage> {
                   ScaffoldMessenger.of(context).showSnackBar(taskAddSnackBar);
                 } else {
                   taskController.editTask(
-                      widget.index!,
-                      Task(
-                          title: titleController.text,
-                          content: contentController.text,
-                          dueDate: selectedDate!,
-                          isCompleted: widget.task!.isCompleted));
+                    widget.uuid,
+                    titleController.text,
+                    contentController.text,
+                    selectedDate!,
+                  );
                   Get.back();
                   final taskAddSnackBar = SnackBar(
                     behavior: SnackBarBehavior.floating,
@@ -197,7 +193,7 @@ class _TaskEditPageState extends State<TaskEditPage> {
                   ScaffoldMessenger.of(context).showSnackBar(taskAddSnackBar);
                 }
               },
-              child: Text((widget.task == null) ? 'Add task' : 'Edit task'),
+              child: Text((widget.uuid == '') ? 'Add task' : 'Edit task'),
             ),
           ],
         ),

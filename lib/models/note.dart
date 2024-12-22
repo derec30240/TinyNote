@@ -1,10 +1,12 @@
 class Note {
+  String uuid;
   String title;
   String content;
   DateTime dateCreated;
   DateTime dateLastEdited;
 
   Note({
+    required this.uuid,
     required this.title,
     required this.content,
     required this.dateCreated,
@@ -12,6 +14,7 @@ class Note {
   });
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
+        uuid: json['uuid'],
         title: json['title'],
         content: json['content'],
         dateCreated: DateTime.parse(json['dateCreated']),
@@ -19,6 +22,7 @@ class Note {
       );
 
   Map<String, dynamic> toJson() => {
+        'uuid': uuid,
         'title': title,
         'content': content,
         'dateCreated': dateCreated.toIso8601String(),
@@ -28,17 +32,9 @@ class Note {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is Note &&
-        other.title == title &&
-        other.content == content &&
-        other.dateCreated == dateCreated &&
-        other.dateLastEdited == dateLastEdited;
+    return other is Note && other.uuid == uuid;
   }
 
   @override
-  int get hashCode =>
-      title.hashCode ^
-      content.hashCode ^
-      dateCreated.hashCode ^
-      dateLastEdited.hashCode;
+  int get hashCode => uuid.hashCode;
 }

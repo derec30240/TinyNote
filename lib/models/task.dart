@@ -1,10 +1,12 @@
 class Task {
+  String uuid;
   String title;
   String content;
   bool isCompleted;
   DateTime dueDate;
 
   Task({
+    required this.uuid,
     required this.title,
     required this.content,
     this.isCompleted = false,
@@ -12,6 +14,7 @@ class Task {
   });
 
   factory Task.fromJson(Map<String, dynamic> json) => Task(
+        uuid: json['uuid'],
         title: json['title'],
         content: json['content'],
         isCompleted: json['isCompleted'],
@@ -19,6 +22,7 @@ class Task {
       );
 
   Map<String, dynamic> toJson() => {
+        'uuid': uuid,
         'title': title,
         'content': content,
         'isCompleted': isCompleted,
