@@ -34,79 +34,76 @@ class NoteEditPage extends StatelessWidget {
         ),
         title: const Text('New Note'),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              TextField(
-                controller: titleController,
-                maxLines: 1,
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              controller: titleController,
+              maxLines: 1,
+              decoration: const InputDecoration(
+                labelText: 'Title',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: TextField(
+                controller: contentController,
+                style: const TextStyle(height: 1.5),
+                maxLines: null,
+                expands: true,
                 decoration: const InputDecoration(
-                  labelText: 'Title',
+                  labelText: 'Content',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: TextField(
-                  controller: contentController,
-                  style: const TextStyle(height: 1.5),
-                  maxLines: null,
-                  expands: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Content',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              FilledButton(
-                onPressed: () {
-                  if (type == 'add') {
-                    notesController.addNote(
-                      titleController.text,
-                      contentController.text,
-                    );
-                    Get.back();
-                    // Get.snackbar('Message', 'Note added.');
-                    final noteAddSnackBar = SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      content: const Text('Note added.'),
-                      action: SnackBarAction(
-                        label: 'Close',
-                        onPressed: () {},
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(noteAddSnackBar);
-                  } else {
-                    notesController.editNote(
-                      notesController.notes
-                          .indexWhere((element) => element.title == title),
-                      titleController.text,
-                      contentController.text,
-                    );
-                    Get.back();
-                    final noteEditSnackBar = SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      content: const Text('Note edited.'),
-                      action: SnackBarAction(
-                        label: 'Close',
-                        onPressed: () {},
-                      ),
-                    );
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(noteEditSnackBar);
-                  }
-                },
-                child: (type == 'add')
-                    ? const Text('Add Note')
-                    : const Text('Confirm Edit'),
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            FilledButton(
+              onPressed: () {
+                if (type == 'add') {
+                  notesController.addNote(
+                    titleController.text,
+                    contentController.text,
+                  );
+                  Get.back();
+                  final noteAddSnackBar = SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: const Text('Note added.'),
+                    action: SnackBarAction(
+                      label: 'Close',
+                      onPressed: () {},
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(noteAddSnackBar);
+                } else {
+                  notesController.editNote(
+                    notesController.notes
+                        .indexWhere((element) => element.title == title),
+                    titleController.text,
+                    contentController.text,
+                  );
+                  Get.back();
+                  final noteEditSnackBar = SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    content: const Text('Note edited.'),
+                    action: SnackBarAction(
+                      label: 'Close',
+                      onPressed: () {},
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(noteEditSnackBar);
+                }
+              },
+              child: (type == 'add')
+                  ? const Text('Add Note')
+                  : const Text('Confirm Edit'),
+            ),
+          ],
         ),
       ),
     );

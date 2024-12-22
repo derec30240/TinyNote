@@ -89,13 +89,11 @@ class DataSearch extends SearchDelegate<String> {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return noteCard(
-                  context,
-                  _notesController.notes[_notesController.notes.indexWhere(
-                      (note) =>
+                return NoteCard(
+                  note: _notesController.notes[_notesController.notes
+                      .indexWhere((note) =>
                           note.title?.toLowerCase() ==
                           noteList[index].toLowerCase())],
-                  index,
                 );
               },
               childCount: noteList.length,

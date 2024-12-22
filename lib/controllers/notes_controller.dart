@@ -49,8 +49,11 @@ class NotesController extends GetxController {
     _saveNotes();
   }
 
-  void deleteNote(int index) {
-    notes.removeAt(index);
+  void deleteNote(Note note) {
+    int index = notes.indexOf(note);
+    if (index != -1) {
+      notes.removeAt(index);
+    }
     update();
     _saveNotes();
   }
@@ -73,16 +76,13 @@ class NotesController extends GetxController {
       if (sortOrder == 'dateCreated') {
         if (ascending) {
           return a.dateCreated.compareTo(b.dateCreated);
-        } else {
-          return b.dateCreated.compareTo(a.dateCreated);
         }
-      } else {
-        if (ascending) {
-          return a.dateLastEdited.compareTo(b.dateLastEdited);
-        } else {
-          return b.dateLastEdited.compareTo(a.dateLastEdited);
-        }
+        return b.dateCreated.compareTo(a.dateCreated);
       }
+      if (ascending) {
+        return a.dateLastEdited.compareTo(b.dateLastEdited);
+      }
+      return b.dateLastEdited.compareTo(a.dateLastEdited);
     });
   }
 }

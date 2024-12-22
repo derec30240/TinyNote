@@ -24,4 +24,21 @@ class Note {
         'dateCreated': dateCreated.toIso8601String(),
         'dateLastEdited': dateLastEdited.toIso8601String(),
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Note &&
+        other.title == title &&
+        other.content == content &&
+        other.dateCreated == dateCreated &&
+        other.dateLastEdited == dateLastEdited;
+  }
+
+  @override
+  int get hashCode =>
+      title.hashCode ^
+      content.hashCode ^
+      dateCreated.hashCode ^
+      dateLastEdited.hashCode;
 }

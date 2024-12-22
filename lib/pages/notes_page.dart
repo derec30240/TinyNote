@@ -50,7 +50,7 @@ class NotesPage extends StatelessWidget {
                             textConfirm: 'Yes',
                             textCancel: 'No',
                             onConfirm: () {
-                              notesController.deleteNote(index);
+                              notesController.deleteNote(note);
                               Get.back();
                               final noteDeleteSnackBar = SnackBar(
                                 behavior: SnackBarBehavior.floating,
@@ -73,7 +73,7 @@ class NotesPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: noteCard(context, note, index),
+                  child: NoteCard(note: note),
                 ).animate().fade().slide(duration: Duration(milliseconds: 300));
               },
             ),
